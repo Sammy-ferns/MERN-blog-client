@@ -18,7 +18,7 @@ const Header = () => {
   };
   return (
     <nav>
-      <div className="nav__conatiner">
+      <div className="nav__conatiner"> // Add another class 'container'
         <Link to="/" className="nav__logo" onClick={closeNavHandler}>
           {/* <img src={Logo} alt="Navbar logo" /> */}
           <FaPenAlt />
