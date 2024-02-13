@@ -20,11 +20,11 @@ import DeletePost from "./pages/DeletePost";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Layout />,
-    errorElement: <ErrorPage />,
+    path: "/",  
+    element: <Layout />, //This is the component that will render when we get to the '/' path
+    errorElement: <ErrorPage />,  //If you go to a path that does not exist
     children: [
-      { index: true, element: <Home /> },
+      { index: true, element: <Home /> },  // This matches the root url
       { path: "posts/:id", element: <PostDetail /> },
       { path: "register", element: <Register /> },
       { path: "login", element: <Login /> },
@@ -44,6 +44,6 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router} />  //responsible for providing routing functionality to the rest of the application
   </React.StrictMode>
 );
