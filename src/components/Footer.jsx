@@ -17,7 +17,7 @@ const Footer = () => {
         </li>
       </ul>
       <div className="footer__copyright">
-        <small>All Rights Reserved $copy; Copyright, Samara Fernandes</small>
+        <small>All Rights Reserved &copy; Copyright, Samara Fernandes</small>
       </div>
     </footer>
   );
