@@ -17,14 +17,19 @@ import AuthorPosts from "./pages/AuthorPosts";
 import Dashboard from "./pages/Dashboard";
 import Logout from "./pages/Logout";
 import DeletePost from "./pages/DeletePost";
+import UserProvider from "./context/userContext";
 
 const router = createBrowserRouter([
   {
-    path: "/",  
-    element: <Layout />, //This is the component that will render when we get to the '/' path
-    errorElement: <ErrorPage />,  //If you go to a path that does not exist
+    path: "/",
+    element: (
+      <UserProvider>
+        <Layout />
+      </UserProvider>
+    ), //This is the component that will render when we get to the '/' path
+    errorElement: <ErrorPage />, //If you go to a path that does not exist
     children: [
-      { index: true, element: <Home /> },  // This matches the root url
+      { index: true, element: <Home /> }, // This matches the root url
       { path: "posts/:id", element: <PostDetail /> },
       { path: "register", element: <Register /> },
       { path: "login", element: <Login /> },
@@ -44,6 +49,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />  //responsible for providing routing functionality to the rest of the application
+    <RouterProvider router={router} />{" "}
+    {/*// Responsible for providing routing functionality to the rest of the application */}
   </React.StrictMode>
 );
