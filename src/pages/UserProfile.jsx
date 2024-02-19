@@ -11,6 +11,7 @@ const UserProfile = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [error, setError] = useState("");
 
   const [isAvatarTouched, setIsAvatarTouched] = useState(false);
 
@@ -23,38 +24,29 @@ const UserProfile = () => {
     if (!token) {
       navigate("/login");
     }
-  }, []);
+  }, [token, navigate]);
 
   useEffect(() => {
     const getUser = async () => {
-      const response = await axios.get(
-        `http://localhost:5000/api/users/${currentUser.id}`,
-        { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
-      );
-      const { name, email, avatar } = response.data;
-      setName(name);
-      setEmail(email);
-      setAvatar(avatar);
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/users/${currentUser.id}`,
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const { name, email, avatar } = response.data;
+        setName(name);
+        setEmail(email);
+        setAvatar(avatar);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
     };
 
     getUser();
-  }, []);
-
-  // const changeAvatarHandler = async () => {
-  //   setIsAvatarTouched(false);
-  //   try {
-  //     const postData = new FormData();
-  //     postData.set("avatar", avatar);
-  //     const response = await axios.post(
-  //       `http://localhost:5000/api/users/change-avatar`,
-  //       postData,
-  //       { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
-  //     );
-  //     setAvatar(response.data.avatar);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  }, [currentUser.id, token]);
 
   const changeAvatarHandler = async () => {
     setIsAvatarTouched(false);
@@ -68,10 +60,34 @@ const UserProfile = () => {
       );
       setAvatar(response.data.avatar);
     } catch (error) {
-      console.log(error);
+      console.error("Error changing avatar:", error);
     }
   };
-  
+
+  const updateUserDetail = async (e) => {
+    e.preventDefault();
+
+    try {
+      const userData = new FormData();
+      userData.set("name", name);
+      userData.set("email", email);
+      userData.set("currentPassword", currentPassword);
+      userData.set("newPassword", newPassword);
+      userData.set("confirmNewPassword", confirmNewPassword);
+
+      const response = await axios.patch(
+        `http://localhost:5000/api/users/edit-user`,
+        userData,
+        { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.status === 200) {
+        navigate("/logout");
+      }
+    } catch (error) {
+      setError(error.response.data.message);
+    }
+  };
+
   return (
     <section className="profile">
       <div className="container profile__container">
@@ -108,8 +124,8 @@ const UserProfile = () => {
           <h1>{currentUser.name}</h1>
 
           {/* form to update user details  */}
-          <form className="form profile__form">
-            <p className="form__error-message">This is an error message.</p>
+          <form className="form profile__form" onSubmit={updateUserDetail}>
+            {error && <p className="form__error-message">{error}</p>}
             <input
               type="text"
               placeholder="Full Name"
