@@ -35,7 +35,8 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background: var(--color-bg);
+  /* background: var(--color-bg); */
+  background-color: #f5e8dd;
   font-size: 0.9rem;
   line-height: 1.6;
   color: var(--color-gray-700);
@@ -144,6 +145,7 @@ nav {
   display: grid;
   place-items: center;
   background: var(255, 255, 255, 0.5);
+  background-color: #febbcc;
   position: fixed;
   top: 0;
   left: 0;
@@ -170,20 +172,13 @@ nav {
   /* padding-right: 10rem; */
 }
 
-/* .nav__logo {
-  width: 3rem;
-  display: block;
-} */
+.showbizz {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
 
 .nav__toggle-btn {
   display: none;
 }
-
-/* .nav__logo-icon {
-  font-size: 2em;
-  color: black;
-  display: block;
-} */
 
 .nav__menu {
   display: flex;
@@ -200,7 +195,8 @@ nav {
 /* Footer  */
 
 footer {
-  background: var(--color-gray-900);
+  /* background: var(--color-gray-900); */
+  background-color: #febbcc;
   margin-top: 6rem;
   padding-top: 6rem;
 }
@@ -261,8 +257,8 @@ footer {
 
 .post {
   background: var(--color-white);
-  padding: 1rem;
-  padding-bottom: 2rem;
+  padding: 2rem;
+  margin: 1rem;
   border-radius: var(--radius-4);
   transition: var(--transition);
   cursor: default;
@@ -279,7 +275,14 @@ footer {
 }
 
 .post__content {
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
+  font-size: large;
+}
+
+.post__title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
 
 .post__content h3 {
@@ -313,6 +316,11 @@ footer {
   background: var(--color-white);
   margin-inline: auto;
   padding: 2rem 0;
+}
+
+.post-detail__container {
+  margin: auto;
+  padding: 2rem;
 }
 
 .post-detail__header {
@@ -601,7 +609,17 @@ textarea {
     padding: 0.85rem 2.5rem;
   }
 
+  /* .nav__toggle-btn {
+    display: inline-block;
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+  } */
+
   .nav__toggle-btn {
+    position: absolute;
+    top: 1.5rem; /* Adjust top position */
+    right: 1.5rem; /* Adjust right position */
     display: inline-block;
     background: transparent;
     font-size: 1.5rem;
@@ -630,8 +648,8 @@ textarea {
   .register,
   .login,
   .create-post {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
   }
 
   .form.profile__form {
@@ -642,6 +660,7 @@ textarea {
   .authors__container {
     grid-template-columns: 1fr;
     gap: 1.2rem;
+    padding: 1rem;
   }
 
   .dashboard__container {
@@ -655,10 +674,10 @@ textarea {
   .dashboard__post-thumbnail {
     width: 5rem;
   }
+
+  .profile__details {
+    padding: 1rem;
+  }
 }
 
-
 /* Loader */
-
-
-

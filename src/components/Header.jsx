@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-// import Logo from "../images/logo.png";
-import { FaBars, FaPenAlt } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { PiTelevisionBold } from "react-icons/pi";
 import { UserContext } from "../context/userContext";
@@ -23,30 +22,52 @@ const Header = () => {
   return (
     <nav>
       <div className=" container nav__conatiner">
-        <Link to="/" className="nav__logo" onClick={closeNavHandler}>
-          {/* <img src={Logo} alt="Navbar logo" /> */}
-          <PiTelevisionBold />
-          <h2>SHOWBIZZ</h2>
+        <Link
+          to="/"
+          onClick={closeNavHandler}
+          className="nav__logo py-2 px-4 rounded"
+        >
+          <span className="flex items-center hover:bg-pink-500 hover:text-white">
+            <PiTelevisionBold />
+            <h2 className="ml-2 showbizz">SHOWBIZZ</h2>
+          </span>
         </Link>
+
         {currentUser?.id && isNavShowing && (
           <ul className="nav__menu">
             <li>
-              <Link to={`/profile/${currentUser.id}`} onClick={closeNavHandler}>
+              <Link
+                to={`/profile/${currentUser.id}`}
+                onClick={closeNavHandler}
+                className="hover:bg-pink-500 hover:text-white py-2 px-4 rounded"
+              >
                 {currentUser?.name}
               </Link>
             </li>
             <li>
-              <Link to="/create" onClick={closeNavHandler}>
+              <Link
+                to="/create"
+                onClick={closeNavHandler}
+                className="hover:bg-pink-500 hover:text-white py-2 px-4 rounded"
+              >
                 Create Post
               </Link>
             </li>
             <li>
-              <Link to="/authors" onClick={closeNavHandler}>
+              <Link
+                to="/authors"
+                onClick={closeNavHandler}
+                className="hover:bg-pink-500 hover:text-white py-2 px-4 rounded"
+              >
                 Authors
               </Link>
             </li>
             <li>
-              <Link to="/logout" onClick={closeNavHandler}>
+              <Link
+                to="/logout"
+                onClick={closeNavHandler}
+                className="hover:bg-pink-500 hover:text-white py-2 px-4 rounded"
+              >
                 Logout
               </Link>
             </li>
@@ -55,12 +76,20 @@ const Header = () => {
         {!currentUser?.id && isNavShowing && (
           <ul className="nav__menu">
             <li>
-              <Link to="/authors" onClick={closeNavHandler}>
+              <Link
+                to="/authors"
+                onClick={closeNavHandler}
+                className="hover:bg-pink-500 hover:text-white py-2 px-4 rounded"
+              >
                 Authors
               </Link>
             </li>
             <li>
-              <Link to="/login" onClick={closeNavHandler}>
+              <Link
+                to="/login"
+                onClick={closeNavHandler}
+                className="hover:bg-pink-500 hover:text-white py-2 px-4 rounded"
+              >
                 Login
               </Link>
             </li>

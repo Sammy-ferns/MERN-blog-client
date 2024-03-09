@@ -15,8 +15,7 @@ const PostItem = ({
     description.length > 145
       ? description.substring(0, 145) + "..."
       : description;
-  const postTitle =
-    title.length > 30 ? description.substring(0, 30) + "..." : title;
+  const postTitle = title.length > 30 ? title.substring(0, 30) + "..." : title;
   return (
     <article className="post">
       <div className="post__thumbnail">
@@ -24,9 +23,10 @@ const PostItem = ({
       </div>
       <div className="post__content">
         <Link to={`/posts/${postID}`}>
-          <h3>{postTitle}</h3>
+          <h3 className="post__title">{postTitle}</h3>
+
+          <p dangerouslySetInnerHTML={{ __html: shortDescription }} />
         </Link>
-        <p dangerouslySetInnerHTML={{ __html: shortDescription }} />
         <div className="post__footer">
           <PostAuthor authorID={authorID} createdAt={createdAt} />
           <Link to={`/posts/categories/${category}`} className="btn category">

@@ -56,14 +56,14 @@ const EditPost = () => {
   ];
 
   const POST_CATEGORIES = [
-    "Agriculture",
-    "Business",
-    "Education",
-    "Entertainment",
-    "Art",
-    "Investment",
+    "Drama",
+    "Comedy",
+    "Thriller",
+    "Horror",
+    "Crime",
+    "Fantasy",
+    "Reality",
     "Uncategorized",
-    "Weather",
   ];
 
   useEffect(() => {
