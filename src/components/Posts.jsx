@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
 import PostItem from "./PostItem";
 import axios from "axios";
-// import { DUMMY_POSTS } from "../data";
 
 const Posts = () => {
+  // State to store fetched posts data
   const [posts, setPosts] = useState([]);
+  // State to manage loading state
   const [isLoading, setIsLoading] = useState(false);
 
+  // Fetches posts on component mount
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
@@ -23,15 +25,26 @@ const Posts = () => {
     fetchPosts();
   }, []);
 
+  // Display loader while data is being fetched
   if (isLoading) {
     return <Loader />;
   }
   return (
     <section className="posts">
+      {/* Conditionally render post content or no posts message */}
       {posts && posts.length > 0 ? (
         <div className="container posts__container">
+          {/* Map through posts array and render PostItem component for each post */}
           {posts.map(
-            ({ _id: id, thumbnail, category, title, description, creator, createdAt }) => (
+            ({
+              _id: id,
+              thumbnail,
+              category,
+              title,
+              description,
+              creator,
+              createdAt,
+            }) => (
               <PostItem
                 key={id}
                 postID={id}

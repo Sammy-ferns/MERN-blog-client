@@ -6,12 +6,14 @@ import { PiTelevisionBold } from "react-icons/pi";
 import { UserContext } from "../context/userContext";
 
 const Header = () => {
+  // State to manage navigation menu visibility based on screen width
   const [isNavShowing, setIsNavShowing] = useState(
     window.innerWidth > 800 ? true : false
   );
 
   const { currentUser } = useContext(UserContext);
 
+  // Function to close the navigation menu on smaller screens
   const closeNavHandler = () => {
     if (window.innerWidth < 800) {
       setIsNavShowing(false);
@@ -22,6 +24,7 @@ const Header = () => {
   return (
     <nav>
       <div className=" container nav__conatiner">
+        {/* Logo link with hover effects and app name */}
         <Link
           to="/"
           onClick={closeNavHandler}
@@ -33,6 +36,7 @@ const Header = () => {
           </span>
         </Link>
 
+        {/* Conditionally render menu links based on user login status and navigation visibility */}
         {currentUser?.id && isNavShowing && (
           <ul className="nav__menu">
             <li>
@@ -95,6 +99,8 @@ const Header = () => {
             </li>
           </ul>
         )}
+
+        {/* Toggle button to show/hide navigation menu */}
         <button
           className="nav__toggle-btn"
           onClick={() => setIsNavShowing(!isNavShowing)}

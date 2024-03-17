@@ -1,32 +1,35 @@
 import React, { useEffect, useContext, useState } from "react";
 import PostAuthor from "../components/PostAuthor";
 import { Link, useParams } from "react-router-dom";
-import Thumbnail from "../images/blog22.jpg";
 import { UserContext } from "../context/userContext";
 import Loader from "../components/Loader";
 import DeletePost from "../pages/DeletePost";
 import axios from "axios";
 
 const PostDetail = () => {
+  // Retrieve post ID from route parameters
   const { id } = useParams();
+  // State variables to manage post data, potential errors, and loading state
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Access current user information from context
   const { currentUser } = useContext(UserContext);
 
+  // Fetch post data on component mounting
   useEffect(() => {
     const getPost = async () => {
-      setIsLoading(true);
+      setIsLoading(true); // Set loading state to true before fetching
       try {
         const response = await axios.get(
           `http://localhost:5000/api/posts/${id}`
         );
-        setPost(response.data);
+        setPost(response.data); // Update state with received post data
       } catch (error) {
-        setError(error);
+        setError(error); // Set error state in case of API errors
       }
-      setIsLoading(false);
+      setIsLoading(false); // Set loading state to false after the request
     };
 
     getPost();
@@ -36,6 +39,7 @@ const PostDetail = () => {
     return <Loader />;
   }
 
+  // Render post details if available, or an error message if applicable
   return (
     <section className="post-detail">
       {error && <p className="error">{error}</p>}

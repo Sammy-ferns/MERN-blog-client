@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 
 const Footer = () => {
+  // State for managing categories visibility and screen size
   const [showCategories, setShowCategories] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
+  // UseEffect for handling screen resize events
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 800);
@@ -18,6 +20,7 @@ const Footer = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Toggle categories, triggered when the categories button is clicked
   const toggleCategories = () => {
     setShowCategories((prevShowCategories) => !prevShowCategories);
   };
@@ -28,6 +31,7 @@ const Footer = () => {
         className="sticky bottom-0 left-0 w-full bg-pink-200 pt-6 pb-6 md:pt-12 md:pb-12"
         style={{ backgroundColor: "#febbcc" }}
       >
+        {/* Render categories based on screen size and visibility */}
         {isSmallScreen ? (
           <div className="flex justify-center md:justify-end">
             <button
@@ -39,6 +43,7 @@ const Footer = () => {
           </div>
         ) : (
           <ul className="flex flex-col md:flex-row md:justify-center md:gap-4">
+            {/* Category links for larger screens */}
             <li>
               <Link
                 to="posts/categories/Drama"
@@ -106,8 +111,11 @@ const Footer = () => {
             {/* Add more categories here */}
           </ul>
         )}
+
+        {/* Conditionally display categories for smaller screens when expanded */}
         {isSmallScreen && showCategories && (
           <ul className="flex flex-col md:flex-row md:justify-center md:gap-4">
+            {/* Category links for smaller screens */}
             <li>
               <Link
                 to="posts/categories/Drama"

@@ -11,10 +11,13 @@ const PostItem = ({
   thumbnail,
   createdAt,
 }) => {
+  // Truncate description if it exceeds 145 characters
   const shortDescription =
     description.length > 145
       ? description.substring(0, 145) + "..."
       : description;
+
+  // Truncate title if it exceeds 30 characters
   const postTitle = title.length > 30 ? title.substring(0, 30) + "..." : title;
   return (
     <article className="post">
@@ -28,7 +31,9 @@ const PostItem = ({
           <p dangerouslySetInnerHTML={{ __html: shortDescription }} />
         </Link>
         <div className="post__footer">
+          {/* Render Post Author component */}
           <PostAuthor authorID={authorID} createdAt={createdAt} />
+          {/* Link to category page */}
           <Link to={`/posts/categories/${category}`} className="btn category">
             {category}
           </Link>

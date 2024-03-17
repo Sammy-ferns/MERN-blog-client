@@ -35,7 +35,6 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  /* background: var(--color-bg); */
   background-color: #f5e8dd;
   font-size: 0.9rem;
   line-height: 1.6;
@@ -168,8 +167,6 @@ nav {
   text-decoration: none;
   font-size: 2rem;
   padding-right: 2rem;
-
-  /* padding-right: 10rem; */
 }
 
 .showbizz {
@@ -186,11 +183,6 @@ nav {
   align-items: center;
   margin-right: center;
 }
-
-/* .nav__toggle-btn {
-  font-size: 2em;
-  color: black;
-} */
 
 /* Footer  */
 
@@ -608,13 +600,6 @@ textarea {
     background: var(--color-white);
     padding: 0.85rem 2.5rem;
   }
-
-  /* .nav__toggle-btn {
-    display: inline-block;
-    background: transparent;
-    font-size: 1.5rem;
-    cursor: pointer;
-  } */
 
   .nav__toggle-btn {
     position: absolute;

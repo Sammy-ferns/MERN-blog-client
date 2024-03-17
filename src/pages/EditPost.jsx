@@ -5,20 +5,26 @@ import { UserContext } from "../context/userContext";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
+// Component for editing an existing post
 const EditPost = () => {
+  // State variables to manage form fields and potential errors
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Uncategorized");
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [error, setError] = useState("");
 
+  // Access navigation object for redirecting
   const navigate = useNavigate();
+
+  // Fetch post ID from route parameters
   const { id } = useParams();
 
+  // Retrieve user information and authentication token from context
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
 
-  //redirect to login page if user is not logged in
+  // Ensure user is authenticated, redirect to login if not
 
   useEffect(() => {
     if (!token) {
@@ -26,6 +32,7 @@ const EditPost = () => {
     }
   });
 
+  // Configuration for the ReactQuill editor
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -55,6 +62,7 @@ const EditPost = () => {
     "image",
   ];
 
+  // Define available post categories
   const POST_CATEGORIES = [
     "Drama",
     "Comedy",
@@ -66,6 +74,7 @@ const EditPost = () => {
     "Uncategorized",
   ];
 
+  // Fetch existing post data on component mounting
   useEffect(() => {
     const getPost = async () => {
       try {
@@ -82,9 +91,11 @@ const EditPost = () => {
     getPost();
   }, [id]);
 
+  // Handle form submission to update the post
   const editPost = async (e) => {
     e.preventDefault();
 
+    // Create a FormData object for sending post data
     const postData = new FormData();
     postData.set("title", title);
     postData.set("category", category);
@@ -98,13 +109,14 @@ const EditPost = () => {
         { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200) {
-        return navigate("/");
+        return navigate("/"); // Redirect to home page on successful update
       }
     } catch (err) {
-      setError(err.response.data.message);
+      setError(err.response.data.message); // Display error message from server
     }
   };
 
+  // Render the Edit Post form
   return (
     <section className="create-post">
       <div className="container">

@@ -4,9 +4,12 @@ import axios from "axios";
 import Loader from "../components/Loader";
 
 const Authors = () => {
+  // State to store fetched author data
   const [authors, setAuthors] = useState([]);
+  // State to manage loading state
   const [isLoading, setIsLoading] = useState(false);
 
+  // Fetch authors on component mount
   useEffect(() => {
     const getAuthors = async () => {
       setIsLoading(true);
@@ -20,17 +23,20 @@ const Authors = () => {
     };
 
     getAuthors();
-  }, []);
+  }, []); // Empty dependency array to run effect only once
 
+  // Render loading indicator while data is being fetched
   if (isLoading) {
     return <Loader />;
   }
 
+  // Render author cards or a message if no authors found
   return (
     <section className="authors">
       {authors.length > 0 ? (
         <div className="container authors__container">
           {authors.map(({ _id: id, avatar, name, posts }) => {
+            // Render an author card for each author
             return (
               <Link key={id} to={`/posts/users/${id}`} className="author">
                 <div className="author__avatar">

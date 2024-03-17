@@ -2,16 +2,8 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="loader">
-      <div
-        className="loader__image"
-        style={{
-          width: "20%",
-          height: 0,
-          paddingBottom: "100%",
-          position: "fixed",
-        }}
-      >
+    <div className="fixed top-0 left-0 w-full h-full z-50 bg-gray-opacity-50 flex items-center justify-center">
+      <div className="loader__image w-20 h-20 rounded-full bg-white shadow-md">
         <iframe
           src="https://giphy.com/embed/3o7bu8sRnYpTOG1p8k"
           width="100%"

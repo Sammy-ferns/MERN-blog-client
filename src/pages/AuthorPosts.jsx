@@ -5,11 +5,15 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const AuthorPosts = () => {
+  // State to store fetched posts data
   const [posts, setPosts] = useState([]);
+  // State to manage loading state
   const [isLoading, setIsLoading] = useState(false);
 
+  // Extract author ID from URL parameters
   const { id } = useParams();
 
+  // Fetch posts on component mount and when author ID changes
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
@@ -27,9 +31,12 @@ const AuthorPosts = () => {
     fetchPosts();
   }, [id]);
 
+  // Render loading indicator while data is being fetched
   if (isLoading) {
     return <Loader />;
   }
+
+  // Render post content or a message if no posts found
   return (
     <section className="posts">
       {posts && posts.length > 0 ? (

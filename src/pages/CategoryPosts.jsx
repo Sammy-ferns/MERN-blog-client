@@ -5,11 +5,15 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const CategoryPosts = () => {
+  // State to store fetched posts data for the current category
   const [posts, setPosts] = useState([]);
+  // State to manage loading state
   const [isLoading, setIsLoading] = useState(false);
 
+  // Extract category name from URL parameters using useParams hook
   const { category } = useParams();
 
+  // Fetch posts for the specified category on component mount and whenever the category changes
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
@@ -27,13 +31,17 @@ const CategoryPosts = () => {
     fetchPosts();
   }, [category]);
 
+  // Render loading indicator while data is being fetched
   if (isLoading) {
     return <Loader />;
   }
+
+  // Render post content or a message if no posts found in the category
   return (
     <section className="posts">
       {posts && posts.length > 0 ? (
         <div className="container posts__container">
+          {/* Map through posts array and render PostItem component for each post */}
           {posts.map(
             ({
               _id: id,

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
+  // State variables to manage user input and potential errors
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -11,33 +12,42 @@ const Register = () => {
   });
 
   const [error, setError] = useState("");
+
+  // Access navigation object for redirecting
   const navigate = useNavigate();
 
+  // Handle input changes for user registration form
   const changeInputHandler = (e) => {
     setUserData((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
     });
   };
 
+  // Handle form submission to register a new user
   const registerUser = async (e) => {
     e.preventDefault();
-    setError("");
+    setError(""); // Clear any previous errors
     try {
+      // Send a POST request to the user registration API endpoint
       const response = await axios.post(
         `http://localhost:5000/api/users/register`,
         userData
       );
       const newUser = await response.data;
-      console.log(newUser);
+      console.log(newUser); // For debugging purposes (can be removed)
+
+      // Handle successful registration or potential errors
       if (!newUser) {
         setError("An error occurred while registering user, please try again");
       }
-      navigate("/login");
+      navigate("/login"); // Redirect to login page after successful registration
     } catch (err) {
+      // Display error message from the server in case of API errors
       setError(err.response.data.message);
     }
   };
 
+  // Render the user registration form
   return (
     <section className="register">
       <div className="container">

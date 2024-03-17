@@ -10,12 +10,14 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Fetch user ID from URL parameters
   const { id } = useParams();
 
+  // Access current user information and authentication token
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
 
-  //redirect to login page if user is not logged in
+  //Redirect to login page if user is not logged in
 
   useEffect(() => {
     if (!token) {
@@ -23,23 +25,24 @@ const Dashboard = () => {
     }
   }, []);
 
+  // Fetch posts created by the specified user
   useEffect(() => {
     const fetchPosts = async () => {
-      setIsLoading(true);
+      setIsLoading(true); // Set loading state to true before fetching
       try {
         const response = await axios.get(
           `http://localhost:5000/api/posts/users/${id}`,
           {
             withCredentials: true,
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token}` }, // Include authentication header
           }
         );
-        setPosts(response.data);
+        setPosts(response.data); // Update posts state with fetched data
       } catch (error) {
         console.log(error);
       }
 
-      setIsLoading(false);
+      setIsLoading(false); // Set loading state to false even on errors
     };
 
     fetchPosts();
@@ -49,11 +52,13 @@ const Dashboard = () => {
     return <Loader />;
   }
 
+  // Render the dashboard content
   return (
     <section className="dashboard">
       {posts.length ? (
         <div className="container dashboard__container">
           {posts.map((post) => {
+            // Render a post card for each fetched post
             return (
               <article key={post.id} className="dashboard__post">
                 <div className="dashboard__post-info">
@@ -82,6 +87,7 @@ const Dashboard = () => {
           })}
         </div>
       ) : (
+        // Display a message if no posts are found
         <h2 className="center">No posts yet</h2>
       )}
     </section>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Avatar from "../images/avatar1.jpg";
 import axios from "axios";
 import ReactTimeAgo from "react-time-ago";
 import TimeAgo from "javascript-time-ago";
@@ -11,9 +10,12 @@ import ru from "javascript-time-ago/locale/ru.json";
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
 
+// Component to display post author information
 const PostAuthor = ({ createdAt, authorID }) => {
+  // State to hold fetched author data
   const [author, setAuthor] = useState({});
   useEffect(() => {
+    // Function to fetch author data on component mount
     const getAuthor = async () => {
       try {
         const response = await axios.get(
@@ -26,7 +28,8 @@ const PostAuthor = ({ createdAt, authorID }) => {
     };
 
     getAuthor();
-  }, []);
+  }, []); // Empty dependency array to run effect only once
+
   return (
     <Link to={`/posts/users/${authorID}`} className="post__author">
       <div className="post__author-avatar">

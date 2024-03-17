@@ -1,54 +1,3 @@
-// import React, { useContext, useEffect } from "react";
-// import { UserContext } from "../context/userContext";
-// import { useNavigate, Link, useLocation } from "react-router-dom";
-// import axios from "axios";
-// import { response } from "express";
-
-// const DeletePost = ({ id }) => {
-//   const navigate = useNavigate();
-//   const location = useLocation();
-
-//   const { currentUser } = useContext(UserContext);
-//   const token = currentUser?.token;
-
-//   //redirect to login page if user is not logged in
-
-//   useEffect(() => {
-//     if (!token) {
-//       navigate("/login");
-//     }
-//   }, []);
-
-//   const removePost = async () => {
-//     try {
-//       const response = await axios.delete(
-//         `http://localhost:5000/api/posts/${id}`,
-//         {
-//           withCredentials: true,
-//           headers: { Authorization: `Bearer ${token}` },
-//         }
-//       );
-//       if (response.status === 200) {
-//         if (location.pathname === `/myposts/${currentUser.id}`) {
-//           navigate(0);
-//         } else {
-//           navigate("/");
-//         }
-//       }
-//     } catch (error) {
-//       console.log("Could not delete post");
-//     }
-//   };
-
-//   return (
-//     <Link className="btn sm danger" onClick={() => removePost(id)}>
-//       Delete
-//     </Link>
-//   );
-// };
-
-// export default DeletePost;
-
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/userContext";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -56,52 +5,62 @@ import axios from "axios";
 import Loader from "../components/Loader";
 
 const DeletePost = ({ postId: id }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  // State variables
   const [isLoading, setIsLoading] = useState(false);
 
+  // Access navigation, current location, and user information
+  const navigate = useNavigate();
+  const location = useLocation();
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
 
-  //redirect to login page if user is not logged in
-
+  // Redirect to login page if user is not authenticated
   useEffect(() => {
     if (!token) {
       navigate("/login");
     }
   }, [token, navigate]);
 
+  // Handle post deletion
   const removePost = async () => {
-    setIsLoading(true);
+    setIsLoading(true); // Set loading state to true before making the request
+
     try {
       const response = await axios.delete(
         `http://localhost:5000/api/posts/${id}`,
         {
-          withCredentials: true,
-          headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true, // Include authentication credentials
+          headers: { Authorization: `Bearer ${token}` }, // Attach authentication header
         }
       );
+
       if (response.status === 200) {
+        // If deletion successful
+        // Navigate appropriately based on current location
         if (location.pathname === `/myposts/${currentUser.id}`) {
-          navigate(0);
+          navigate(0); // Reload the current page (using a route index of 0)
         } else {
-          navigate("/");
+          navigate("/"); // Redirect to the home page
         }
       }
-      setIsLoading(false);
     } catch (error) {
       console.log("Could not delete post");
+    } finally {
+      setIsLoading(false); // Set loading state to false even on errors
     }
   };
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
+  // Render loading indicator or delete button
   return (
-    <button className="btn sm danger" onClick={removePost}>
-      Delete
-    </button>
+    <div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <button className="btn sm danger" onClick={removePost}>
+          Delete
+        </button>
+      )}
+    </div>
   );
 };
 

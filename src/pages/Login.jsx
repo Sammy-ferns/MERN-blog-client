@@ -3,31 +3,41 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../context/userContext";
 
+// Component for handling user login
 const Login = () => {
+  // State variables to manage user input and potential errors
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
 
   const [error, setError] = useState("");
+
+  // Access navigation object for redirecting
   const navigate = useNavigate();
 
+  // Retrieve function to set the current user from context
   const { setCurrentUser } = useContext(UserContext);
 
+  // Handle input changes for email and password fields
   const changeInputHandler = (e) => {
     setUserData((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
     });
   };
 
+  // Handle form submission to log in the user
   const loginUser = async (e) => {
     e.preventDefault();
-    setError("");
+    setError(""); // Clear any previous errors
     try {
+      // Send a POST request to the login API endpoint
       const response = await axios.post(
         `http://localhost:5000/api/users/login`,
         userData
       );
+
+      // Store the received user data in context and navigate to home
       const user = await response.data;
       setCurrentUser(user);
       navigate("/");
@@ -36,6 +46,7 @@ const Login = () => {
     }
   };
 
+  // Render the login form
   return (
     <section className="login">
       <div className="container">

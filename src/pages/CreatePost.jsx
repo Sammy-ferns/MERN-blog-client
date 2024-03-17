@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CreatePost = () => {
+  // State variables to manage form data and error feedback
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Uncategorized");
   const [description, setDescription] = useState("");
@@ -13,10 +14,11 @@ const CreatePost = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Access current user information from context
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
 
-  //redirect to login page if user is not logged in
+  //Redirect to login page if user is not logged in
 
   useEffect(() => {
     if (!token) {
@@ -24,6 +26,7 @@ const CreatePost = () => {
     }
   }, []);
 
+  // Configuration for the ReactQuill editor
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -53,6 +56,7 @@ const CreatePost = () => {
     "image",
   ];
 
+  // Define available post categories
   const POST_CATEGORIES = [
     "Drama",
     "Comedy",
@@ -64,13 +68,14 @@ const CreatePost = () => {
     "Uncategorized",
   ];
 
+  // Handle form submission to create a new post
   const createPost = async (e) => {
     e.preventDefault();
 
     const postData = new FormData();
     postData.set("title", title);
     postData.set("category", category);
-    postData.set("description", description);
+    postData.set("description", description); // Assuming description is in HTML format
     postData.set("thumbnail", thumbnail);
 
     try {
@@ -80,13 +85,14 @@ const CreatePost = () => {
         { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 201) {
-        return navigate("/");
+        return navigate("/"); // Redirect to home page on success
       }
     } catch (err) {
-      setError(err.response.data.message);
+      setError(err.response.data.message); // Display error message from server
     }
   };
 
+  // Render the create post form
   return (
     <section className="create-post">
       <div className="container">
@@ -131,3 +137,4 @@ const CreatePost = () => {
 };
 
 export default CreatePost;
+

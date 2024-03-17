@@ -5,6 +5,7 @@ import { UserContext } from "../context/userContext";
 import axios from "axios";
 
 const UserProfile = () => {
+  // State variables to manage user data, avatar, errors, and editing state
   const [avatar, setAvatar] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,15 +18,18 @@ const UserProfile = () => {
 
   const navigate = useNavigate();
 
+  // Access current user information and navigation object
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
 
+  // Redirect to login if user is not authenticated
   useEffect(() => {
     if (!token) {
       navigate("/login");
     }
   }, [token, navigate]);
 
+  // Fetch user details on component mount
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -48,6 +52,7 @@ const UserProfile = () => {
     getUser();
   }, [currentUser.id, token]);
 
+  // Handle avatar change
   const changeAvatarHandler = async () => {
     setIsAvatarTouched(false);
     try {
@@ -64,6 +69,7 @@ const UserProfile = () => {
     }
   };
 
+  // Handle form submission for updating user details
   const updateUserDetail = async (e) => {
     e.preventDefault();
 
@@ -88,6 +94,7 @@ const UserProfile = () => {
     }
   };
 
+  // Render user profile elements
   return (
     <section className="profile">
       <div className="container profile__container">
