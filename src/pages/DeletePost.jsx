@@ -27,7 +27,7 @@ const DeletePost = ({ postId: id }) => {
 
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/posts/${id}`,
+        `https://mern-blog-server-alpha.vercel.app/api/posts/${id}`,
         {
           withCredentials: true, // Include authentication credentials
           headers: { Authorization: `Bearer ${token}` }, // Attach authentication header

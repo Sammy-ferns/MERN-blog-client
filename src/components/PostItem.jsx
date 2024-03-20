@@ -22,7 +22,10 @@ const PostItem = ({
   return (
     <article className="post">
       <div className="post__thumbnail">
-        <img src={`http://localhost:5000/uploads/${thumbnail}`} alt={title} />
+        <img
+          src={`https://mern-blog-server-alpha.vercel.app/uploads/${thumbnail}`}
+          alt={title}
+        />
       </div>
       <div className="post__content">
         <Link to={`/posts/${postID}`}>

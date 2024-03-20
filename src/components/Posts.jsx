@@ -14,7 +14,9 @@ const Posts = () => {
     const fetchPosts = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("http://localhost:5000/api/posts");
+        const response = await axios.get(
+          "https://mern-blog-server-alpha.vercel.app/api/posts"
+        );
         setPosts(response?.data);
       } catch (err) {
         console.error(err);

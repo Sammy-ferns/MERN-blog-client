@@ -79,7 +79,7 @@ const EditPost = () => {
     const getPost = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/posts/${id}`
+          `https://mern-blog-server-alpha.vercel.app/api/posts/${id}`
         );
         setTitle(response.data.title);
         setDescription(response.data.description);
@@ -104,7 +104,7 @@ const EditPost = () => {
 
     try {
       const response = await axios.patch(
-        `http://localhost:5000/api/posts/${id}`,
+        `https://mern-blog-server-alpha.vercel.app/api/posts/${id}`,
         postData,
         { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
       );

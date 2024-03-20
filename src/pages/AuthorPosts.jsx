@@ -19,7 +19,7 @@ const AuthorPosts = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/posts/users/${id}`
+          `https://mern-blog-server-alpha.vercel.app/api/posts/users/${id}`
         );
         setPosts(response?.data);
       } catch (err) {

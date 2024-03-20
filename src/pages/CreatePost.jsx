@@ -80,7 +80,7 @@ const CreatePost = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/posts`,
+        `https://mern-blog-server-alpha.vercel.app/api/posts`,
         postData,
         { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
       );
@@ -137,4 +137,3 @@ const CreatePost = () => {
 };
 
 export default CreatePost;
-

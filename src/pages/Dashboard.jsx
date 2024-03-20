@@ -31,7 +31,7 @@ const Dashboard = () => {
       setIsLoading(true); // Set loading state to true before fetching
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/posts/users/${id}`,
+          `https://mern-blog-server-alpha.vercel.app/api/posts/users/${id}`,
           {
             withCredentials: true,
             headers: { Authorization: `Bearer ${token}` }, // Include authentication header
@@ -64,7 +64,7 @@ const Dashboard = () => {
                 <div className="dashboard__post-info">
                   <div className="dashboard__post-thumbnail">
                     <img
-                      src={`http://localhost:5000/uploads/${post.thumbnail}`}
+                      src={`https://mern-blog-server-alpha.vercel.app/uploads/${post.thumbnail}`}
                       alt=""
                     />
                   </div>
