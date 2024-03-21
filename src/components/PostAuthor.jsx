@@ -19,7 +19,7 @@ const PostAuthor = ({ createdAt, authorID }) => {
     const getAuthor = async () => {
       try {
         const response = await axios.get(
-          `https://mern-blog-server-alpha.vercel.app/api/users/${authorID}`
+          `https://showbizz-samara.onrender.com/api/users/${authorID}`
         );
         setAuthor(response?.data);
       } catch (error) {
@@ -34,7 +34,7 @@ const PostAuthor = ({ createdAt, authorID }) => {
     <Link to={`/posts/users/${authorID}`} className="post__author">
       <div className="post__author-avatar">
         <img
-          src={`https://mern-blog-server-alpha.vercel.app/uploads/${author?.avatar}`}
+          src={`https://showbizz-samara.onrender.com/uploads/${author?.avatar}`}
           alt=""
         />
       </div>

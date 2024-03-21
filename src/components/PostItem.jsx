@@ -23,7 +23,7 @@ const PostItem = ({
     <article className="post">
       <div className="post__thumbnail">
         <img
-          src={`https://mern-blog-server-alpha.vercel.app/uploads/${thumbnail}`}
+          src={`https://showbizz-samara.onrender.com/uploads/${thumbnail}`}
           alt={title}
         />
       </div>

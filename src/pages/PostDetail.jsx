@@ -23,7 +23,7 @@ const PostDetail = () => {
       setIsLoading(true); // Set loading state to true before fetching
       try {
         const response = await axios.get(
-          `https://mern-blog-server-alpha.vercel.app/api/posts/${id}`
+          `https://showbizz-samara.onrender.com/api/posts/${id}`
         );
         setPost(response.data); // Update state with received post data
       } catch (error) {
@@ -62,7 +62,7 @@ const PostDetail = () => {
           <h1>{post.title}</h1>
           <div className="post-detail__thumbnail">
             <img
-              src={`https://mern-blog-server-alpha.vercel.app/uploads/${post.thumbnail}`}
+              src={`https://showbizz-samara.onrender.com/uploads/${post.thumbnail}`}
               alt=""
             />
           </div>

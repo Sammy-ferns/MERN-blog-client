@@ -80,7 +80,7 @@ const CreatePost = () => {
 
     try {
       const response = await axios.post(
-        `https://mern-blog-server-alpha.vercel.app/api/posts`,
+        `https://showbizz-samara.onrender.com/api/posts`,
         postData,
         { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
       );

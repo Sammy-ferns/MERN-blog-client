@@ -33,7 +33,7 @@ const Login = () => {
     try {
       // Send a POST request to the login API endpoint
       const response = await axios.post(
-        `https://mern-blog-server-alpha.vercel.app/api/users/login`,
+        `https://showbizz-samara.onrender.com/api/users/login`,
         userData
       );
 

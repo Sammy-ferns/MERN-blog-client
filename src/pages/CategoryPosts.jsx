@@ -19,7 +19,7 @@ const CategoryPosts = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `https://mern-blog-server-alpha.vercel.app/api/posts/categories/${category}`
+          `https://showbizz-samara.onrender.com/api/posts/categories/${category}`
         );
         setPosts(response?.data);
       } catch (err) {

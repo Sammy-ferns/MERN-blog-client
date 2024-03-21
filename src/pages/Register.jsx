@@ -30,7 +30,7 @@ const Register = () => {
     try {
       // Send a POST request to the user registration API endpoint
       const response = await axios.post(
-        `https://mern-blog-server-alpha.vercel.app/api/users/register`,
+        `https://showbizz-samara.onrender.com/api/users/register`,
         userData
       );
       const newUser = await response.data;

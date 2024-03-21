@@ -34,7 +34,7 @@ const UserProfile = () => {
     const getUser = async () => {
       try {
         const response = await axios.get(
-          `https://mern-blog-server-alpha.vercel.app/api/users/${currentUser.id}`,
+          `https://showbizz-samara.onrender.com/api/users/${currentUser.id}`,
           {
             withCredentials: true,
             headers: { Authorization: `Bearer ${token}` },
@@ -59,7 +59,7 @@ const UserProfile = () => {
       const postData = new FormData();
       postData.append("avatar", avatar); // Use append instead of set
       const response = await axios.post(
-        `https://mern-blog-server-alpha.vercel.app/api/users/change-avatar`,
+        `https://showbizz-samara.onrender.com/api/users/change-avatar`,
         postData,
         { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
       );
@@ -82,7 +82,7 @@ const UserProfile = () => {
       userData.set("confirmNewPassword", confirmNewPassword);
 
       const response = await axios.patch(
-        `https://mern-blog-server-alpha.vercel.app/api/users/edit-user`,
+        `https://showbizz-samara.onrender.com/api/users/edit-user`,
         userData,
         { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
       );
@@ -105,7 +105,7 @@ const UserProfile = () => {
           <div className="avatar__wrapper">
             <div className="profile__avatar">
               <img
-                src={`https://mern-blog-server-alpha.vercel.app/uploads/${avatar}`}
+                src={`https://showbizz-samara.onrender.com/uploads/${avatar}`}
                 alt=""
               />
             </div>

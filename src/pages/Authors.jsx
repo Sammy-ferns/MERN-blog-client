@@ -15,7 +15,7 @@ const Authors = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `https://mern-blog-server-alpha.vercel.app/api/users`
+          `https://showbizz-samara.onrender.com/api/users`
         );
         setAuthors(response?.data);
       } catch (error) {
@@ -43,7 +43,7 @@ const Authors = () => {
               <Link key={id} to={`/posts/users/${id}`} className="author">
                 <div className="author__avatar">
                   <img
-                    src={`https://mern-blog-server-alpha.vercel.app/uploads/${avatar}`}
+                    src={`https://showbizz-samara.onrender.com/uploads/${avatar}`}
                     alt={`${name}`}
                   />
                 </div>

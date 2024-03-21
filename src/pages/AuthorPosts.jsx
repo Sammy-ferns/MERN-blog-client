@@ -19,7 +19,7 @@ const AuthorPosts = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `https://mern-blog-server-alpha.vercel.app/api/posts/users/${id}`
+          `https://showbizz-samara.onrender.com/api/posts/users/${id}`
         );
         setPosts(response?.data);
       } catch (err) {
